@@ -1,4 +1,4 @@
-package com.example.bniappsbagus.model.testcase1
+package com.example.bniappsbagus.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,5 +11,5 @@ data class DataTransaksiQr(
     val bank : String,
     val id_transaksi :String,
     val merchant  : String,
-    val nominal : String,
+    val nominal : Int,
 )

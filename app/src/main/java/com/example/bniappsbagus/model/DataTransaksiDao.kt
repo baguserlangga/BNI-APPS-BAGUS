@@ -1,4 +1,4 @@
-package com.example.bniappsbagus.model.testcase1
+package com.example.bniappsbagus.model
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,10 +13,7 @@ interface DataTransaksiDao {
     suspend fun insertTransaksi(transaksiQrs: DataTransaksiQr)
     @Delete
     suspend fun deleteTransaksi(transaksiQrs: DataTransaksiQr)
-
-
     @Query("SELECT * FROM datatransaksiqr ORDER BY id ASC")
-    fun getContactOrderdByFirstname(): kotlinx.coroutines.flow.Flow<List<DataTransaksiQr>>
-    @Query("SELECT * FROM datatransaksiqr ORDER BY id ASC ")
-    fun getContactOrderdByLastname(): kotlinx.coroutines.flow.Flow<List<DataTransaksiQr>>
+    fun getTransaksiOrderdById(): kotlinx.coroutines.flow.Flow<List<DataTransaksiQr>>
+
 }

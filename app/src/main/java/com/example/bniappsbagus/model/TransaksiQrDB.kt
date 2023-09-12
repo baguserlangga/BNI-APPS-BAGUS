@@ -1,7 +1,8 @@
-package com.example.bniappsbagus.model.testcase1
+package com.example.bniappsbagus.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+
 @Database(
     entities = [DataTransaksiQr::class],
     version = 1

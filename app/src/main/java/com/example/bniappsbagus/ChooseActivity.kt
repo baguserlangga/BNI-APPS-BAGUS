@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.bniappsbagus.model.TransaksiEvent
 import com.example.bniappsbagus.ui.theme.BNIAPPSBagusTheme
 import org.w3c.dom.Text
 
@@ -29,6 +30,7 @@ class ChooseActivity :  ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val onEvent : (TransaksiEvent)-> Unit
             val transaksi = intent.getStringExtra("transaksi")
             BNIAPPSBagusTheme {
                 // A surface container using the 'background' color from the theme
@@ -38,9 +40,6 @@ class ChooseActivity :  ComponentActivity() {
                 ) {
                     Column(horizontalAlignment =Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                         Row() {
-//                            Text(text = if (transaksi!=null)transaksi else "")
-//                            Text(text = if (transaksi!=null)transaksi else "")
-
                             if (transaksi!=null)
                             {
                                 var str = transaksi.toString()
@@ -50,7 +49,22 @@ class ChooseActivity :  ComponentActivity() {
                                 Log.d(TAG, "onCreatessss:"+ parts.toString())
 //                                Text(text = parts.toString())
                                 parts.forEachIndexed{index, s ->
-                                    Text(text =s)
+                                    if(index==0)
+                                    {
+                                        TransaksiEvent.SetBank(Bank = s)
+                                    }
+                                    else if(index==1)
+                                    {
+                                        TransaksiEvent.SetIdTransaksi(idTransaksi = s)
+                                    }
+                                    else if(index==2)
+                                    {
+                                        TransaksiEvent.SetMerchant(merchant = s)
+                                    }
+                                    else if(index==3)
+                                    {
+                                        TransaksiEvent.SetNominal(nominal = s.toInt())
+                                    }
                                 }
 
 
@@ -64,7 +78,10 @@ class ChooseActivity :  ComponentActivity() {
 
                         }
                             Row(){
-                                Button(onClick = { /*TODO*/ },modifier = Modifier.fillMaxWidth()) {
+
+                                Button(onClick = {
+                                    TransaksiEvent.saveTransaksi
+                                                 },modifier = Modifier.fillMaxWidth()) {
                                     Text(text = "Bayar")
 
                                 }

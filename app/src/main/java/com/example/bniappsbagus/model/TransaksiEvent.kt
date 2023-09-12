@@ -1,10 +1,11 @@
-package com.example.bniappsbagus.model.testcase1
+package com.example.bniappsbagus.model
 
 sealed interface TransaksiEvent {
     object saveTransaksi : TransaksiEvent
-    data class SetFirstName(val firstName: String) : TransaksiEvent
-    data class SetLastName(val lastName: String) : TransaksiEvent
-    data class SetPhoneNumber(val phoneNumber: String): TransaksiEvent
+    data class SetBank(val Bank: String) : TransaksiEvent
+    data class SetIdTransaksi(val idTransaksi: String) : TransaksiEvent
+    data class SetMerchant(val merchant: String): TransaksiEvent
+    data class SetNominal(val nominal: Int): TransaksiEvent
 
     object showDialog : TransaksiEvent
     object HideDialog : TransaksiEvent
