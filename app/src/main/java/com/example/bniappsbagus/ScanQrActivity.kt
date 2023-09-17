@@ -38,9 +38,11 @@ import com.example.bniappsbagus.ui.theme.BNIAPPSBagusTheme
 class ScanQrActivity : ComponentActivity() {
     private lateinit var mCameraEnhancer: CameraEnhancer
     private lateinit var mBarcodeReader: BarcodeReader
+    var scaned = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+//            AdminClubMembershipScanScreen()
 
                 val context = LocalContext.current
 
@@ -62,11 +64,19 @@ class ScanQrActivity : ComponentActivity() {
                     onResult = { granted ->
                         hasCameraPermission = granted
                         if (granted == true) {
+
                             startScanning() { result ->
-                                barcodeTextResult = result.barcodeFormatString+": "+result.barcodeText
-                                val intent = Intent(this, ChooseActivity::class.java)
-                                intent.putExtra("transaksi" , result.barcodeText.toString())
-                                startActivity(intent)
+                                if(scaned==false)
+                                {
+                                    barcodeTextResult = result.barcodeFormatString+": "+result.barcodeText
+                                    val intent = Intent(this, ChooseActivity::class.java)
+                                    intent.putExtra("transaksi" , result.barcodeText.toString())
+                                    startActivity(intent)
+                                }else
+                                {
+
+                                }
+
                             }
                             mCameraEnhancer.open()
                         }

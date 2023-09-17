@@ -1,10 +1,13 @@
 package com.example.bniappsbagus
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dynamsoft.dce.CameraEnhancer
 import com.example.bniappsbagus.ui.theme.BNIAPPSBagusTheme
+import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : ComponentActivity() {
@@ -36,8 +40,10 @@ class MainActivity : ComponentActivity() {
                         Row(verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center) {
                             Button(onClick = {
-                                val intent = Intent(this@MainActivity, ScanQrActivity::class.java)
+                                val intent = Intent(this@MainActivity, TransaksiActivity::class.java)
                                 startActivity(intent)
+
+
                             }) {
                                 Text(text = "Scan QR")
                             }

@@ -47,11 +47,11 @@ class DataTransaksiViewModel(private val dao: DataTransaksiDao): ViewModel() {
                 }
             is TransaksiEvent.SetMerchant ->
                 viewModelScope.launch {
-                    _state.update { it.copy(id_transaksi = event.merchant) }
+                    _state.update { it.copy(merchant = event.merchant) }
                 }
             is TransaksiEvent.SetNominal ->
                 viewModelScope.launch {
-                    _state.update { it.copy(id_transaksi = event.nominal) }
+                    _state.update { it.copy(nominal = event.nominal) }
                 }
 //            is TransaksiEvent.SortContacts ->
 //                _sortType.value=event.sortType

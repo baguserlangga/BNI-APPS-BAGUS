@@ -1,6 +1,10 @@
 package com.example.bniappsbagus
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.graphics.drawable.Icon
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -25,12 +29,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons.Default
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.bniappsbagus.model.TransaksiEvent
 import com.example.bniappsbagus.model.TransaksiState
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +46,8 @@ fun TransaksiScreen ( state: TransaksiState,
                       onEvent:(TransaksiEvent)->Unit){
     Scaffold(floatingActionButton = {
         FloatingActionButton(onClick = {
-//            onEvent(ContactEvent.showDialog)
+            onEvent(TransaksiEvent.showDialog)
+
         }
         )
         {
@@ -47,11 +55,15 @@ fun TransaksiScreen ( state: TransaksiState,
         }
     }, modifier = Modifier.padding(16.dp)
     ) { padding ->
+        if(state.isAddingTransaksi==true){
+            AddTransaksiDialog(state = state, onEvent =onEvent )
+        }
         LazyColumn(contentPadding = padding,
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         )
         {
+
             items(state.Transaksi){ transaksi->
                 Row(modifier = Modifier.fillMaxWidth())
                 {
@@ -65,6 +77,14 @@ fun TransaksiScreen ( state: TransaksiState,
             }
 
         }
+        val scanLauncher = rememberLauncherForActivityResult(
+            contract = ScanContract(),
+            onResult = { result -> Log.i(TAG, "scanned code: ${result.contents}") }
+        )
+//        Button(onClick = { scanLauncher.launch(ScanOptions()) }) {
+//            Text(text = "Scan barcode")
+//        }
 
     }
+
 }
